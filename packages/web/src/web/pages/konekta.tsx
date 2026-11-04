@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, ArrowRight, Check, ShieldCheck, MessageCircle, MapPin, Sun, Moon, Menu, X, Plus, ShoppingBag, Wrench, House, Store, Smartphone, LockKeyhole, ChevronRight, Briefcase, Search, BadgeCheck, AlertTriangle } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Check, ShieldCheck, MessageCircle, MapPin, Sun, Moon, Menu, X, Plus, ShoppingBag, Wrench, House, Store, Smartphone, LockKeyhole, ChevronRight, Briefcase, BadgeCheck, AlertTriangle } from 'lucide-react';
 
 const PLAY = 'https://play.google.com/store/apps/details?id=com.konekta.sl';
 const categories = [
@@ -23,7 +23,8 @@ export default function Konekta() {
   const [dark, setDark] = useState(() => { try { return localStorage.getItem('konekta-theme') === 'dark'; } catch { return false; } });
   const [menu, setMenu] = useState(false);
   const [category, setCategory] = useState(0);
-  const [faq, setFaq] = useState<number | null>(0);\n  const [previewCategory, setPreviewCategory] = useState('Products');\n  const previewCategories = [{ name: 'Products', icon: ShoppingBag, description: 'Browse items from local sellers' }, { name: 'Properties', icon: House, description: 'Explore homes, rooms and land' }, { name: 'Services', icon: Wrench, description: 'Find local professionals' }, { name: 'Businesses', icon: Store, description: 'Discover shops near you' }, { name: 'Jobs', icon: Briefcase, description: 'Explore work and opportunities' }];
+  const [faq, setFaq] = useState<number | null>(0);
+  const [previewCategory, setPreviewCategory] = useState('Products');\n  const previewCategories = [{ name: 'Products', icon: ShoppingBag, description: 'Browse items from local sellers' }, { name: 'Properties', icon: House, description: 'Explore homes, rooms and land' }, { name: 'Services', icon: Wrench, description: 'Find local professionals' }, { name: 'Businesses', icon: Store, description: 'Discover shops near you' }, { name: 'Jobs', icon: Briefcase, description: 'Explore work and opportunities' }];
   useEffect(() => { document.documentElement.classList.toggle('dark', dark); try { localStorage.setItem('konekta-theme', dark ? 'dark' : 'light'); } catch { /* Storage unavailable */ } }, [dark]);
   useEffect(() => { const close = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenu(false); }; window.addEventListener('keydown', close); return () => window.removeEventListener('keydown', close); }, []);
   const current = categories[category];
@@ -31,7 +32,7 @@ export default function Konekta() {
     <a className="skip-link" href="#main">Skip to content</a>
     <header id="top" className="header wrap">
       <Brand />
-      <nav className={menu ? 'nav is-open' : 'nav'} aria-label="Main navigation">{[['Marketplace', '#marketplace'], ['Marketplace', '#marketplace'], ['Trust & safety', '#safety-centre'], ['For business', '#business'], ['Our story', '#local']].map(([text, link]) => <a key={link} href={link} onClick={() => setMenu(false)}>{text}</a>)}</nav>
+      <nav className={menu ? 'nav is-open' : 'nav'} aria-label="Main navigation">{[['Marketplace', '#marketplace'], ['Trust & safety', '#safety-centre'], ['For business', '#business'], ['Our story', '#local']].map(([text, link]) => <a key={link} href={link} onClick={() => setMenu(false)}>{text}</a>)}</nav>
       <div className="header-actions"><button className="icon-button theme-switch" onClick={() => setDark(!dark)} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>{dark ? <Sun size={19} /> : <Moon size={19} />}</button><Download /><button className="icon-button menu-toggle" aria-expanded={menu} aria-label={menu ? 'Close menu' : 'Open menu'} onClick={() => setMenu(!menu)}>{menu ? <X /> : <Menu />}</button></div>
     </header>
     <main id="main">
